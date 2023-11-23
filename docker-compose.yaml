@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  pyfront:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: pyfront:2
+    container_name: pyfront
+    ports:
+      - "8020:8000"
+    networks:
+      - pythonpr
+networks:
+  networkdev:
+    driver: bridge

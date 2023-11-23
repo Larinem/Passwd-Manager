@@ -1,0 +1,33 @@
+name: Docker build python1
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: [self-hosted]
+    steps:
+      - name: Checkout #Клонирование кода из репозитория в GHA для работы с ним
+        uses: actions/checkout@v2
+
+      # - name: Use Node.js #Настройка среды выполения кода с установкой nodejs
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '18.6.0'
+
+      # - name: Install dependencies #Установка зависимойстей для проекта
+      #   run: npm install
+
+      # - name: Run ESLint #Выполнение статического теста кода при помощи ESLint
+      #   run: npx eslint .
+
+      - name: Project build
+        run: docker compose --verbose -f "docker-compose.yaml" up -d --build
+
+
+      # - name: Start back
+      #   run: sudo -u larry docker run -d -p 8080:8080 back:$(date +%Y%m%d%H%)
+      # - name: Start front
+      #   run: sudo -u larry docker run -d -p 80:80 front:$(date +%Y%m%d%H%)
+      # - name: Create Image
+      #   run: sudo -u larry docker build -t webtest2:1.0 -f dockerfile .
