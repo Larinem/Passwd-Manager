@@ -1,4 +1,7 @@
-FROM python:3-slim
+FROM python:3
+
+RUN apt-get update && \
+    apt-get install -y libjpeg-dev zlib1g-dev
 
 WORKDIR /app
 ADD . .
